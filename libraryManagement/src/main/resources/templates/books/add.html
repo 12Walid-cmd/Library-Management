@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Book</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h1 th:text="${book.id == null} ? 'Add New Book' : 'Edit Book'"></h1>
+
+<form th:action="@{/books/save}" th:object="${book}" method="post">
+
+    <!-- Hidden field used when editing an existing book -->
+    <input type="hidden" th:field="*{id}"/>
+
+    <div>
+        <label>ISBN:</label>
+        <input type="text" th:field="*{isbn}" required>
+    </div>
+
+    <div>
+        <label>Title:</label>
+        <input type="text" th:field="*{title}" required>
+    </div>
+
+    <div>
+        <label>Author:</label>
+        <input type="text" th:field="*{author}" required>
+    </div>
+
+    <div>
+        <label>Publisher:</label>
+        <input type="text" th:field="*{publisher}">
+    </div>
+
+    <div>
+        <label>Publication Year:</label>
+        <input type="number" th:field="*{publicationYear}">
+    </div>
+
+    <div>
+        <label>Total Copies:</label>
+        <input type="number" th:field="*{totalCopies}" required>
+    </div>
+
+    <div>
+        <label>Available Copies:</label>
+        <input type="number" th:field="*{availableCopies}" required>
+    </div>
+
+    <div>
+        <label>Shelf Location:</label>
+        <input type="text" th:field="*{shelfLocation}">
+    </div>
+
+    <div>
+        <label>Status:</label>
+        <input type="text" th:field="*{status}">
+    </div>
+
+    <div>
+        <button type="submit">Save Book</button>
+    </div>
+
+</form>
+
+<br>
+<a th:href="@{/books}">Back to Book List</a>
+
+</body>
+</html>
