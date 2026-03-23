@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Library Management System</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="navbar">
+    <div class="nav-left">
+        <a th:href="@{/}" class="brand">LMS</a>
+    </div>
+
+    <div class="nav-right">
+        <div sec:authorize="isAnonymous()">
+            <a th:href="@{/login}" class="nav-button">Login</a>
+        </div>
+
+        <div sec:authorize="isAuthenticated()" style="display:flex; align-items:center; gap:12px;">
+            <span style="color:white;">Welcome, <span sec:authentication="name"></span></span>
+            <form th:action="@{/logout}" method="post" style="margin:0;">
+                <button type="submit" class="nav-button">Logout</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="hero">
+        <h1>Welcome to the Library Management System</h1>
+        <p>
+            This system helps library staff manage books, clients, and loans efficiently.
+            Please log in to access management features.
+        </p>
+    </div>
+
+    <div class="card-grid">
+        <div class="feature-card">
+            <h3>Books</h3>
+            <p>View and manage books in the library collection.</p>
+            <a th:href="@{/books}" class="btn">Go to Books</a>
+        </div>
+
+        <div class="feature-card">
+            <h3>Clients</h3>
+            <p>Manage registered clients and members.</p>
+            <a th:href="@{/clients}" class="btn">Go to Clients</a>
+        </div>
+
+        <div class="feature-card">
+            <h3>Loans</h3>
+            <p>Borrow and return books using the loan management module.</p>
+            <a th:href="@{/loans}" class="btn">Go to Loans</a>
+        </div>
+
+        <div class="feature-card" sec:authorize="hasRole('ADMIN')">
+            <h3>Admin Dashboard</h3>
+            <p>View system statistics and administrative controls.</p>
+            <a th:href="@{/admin}" class="btn">Go to Dashboard</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

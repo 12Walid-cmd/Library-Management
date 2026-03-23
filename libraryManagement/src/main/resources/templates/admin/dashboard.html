@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="fragments/header :: navbar"></div>
+
+<div class="container">
+    <h1 class="mb-30">Admin Dashboard</h1>
+
+    <div class="card-grid mb-30">
+        <div class="card">
+            <h3>Total Books</h3>
+            <p class="big-number" th:text="${totalBooks}">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Clients</h3>
+            <p class="big-number" th:text="${totalClients}">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Active Loans</h3>
+            <p class="big-number" th:text="${activeLoans}">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Overdue Loans</h3>
+            <p class="big-number" th:text="${overdueLoans}">0</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

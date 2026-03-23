@@ -1,51 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Client</title>
+    <title>Add / Edit Client</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<h1 th:text="${client.id == null} ? 'Add New Client' : 'Edit Client'"></h1>
+<div th:replace="fragments/header :: navbar"></div>
 
-<form th:action="@{/clients/save}" th:object="${client}" method="post">
+<div class="container">
+    <h1 class="mb-20" th:text="${client.id == null} ? 'Add Client' : 'Edit Client'">Add Client</h1>
 
-    <!-- Hidden field keeps the id for edit mode -->
-    <input type="hidden" th:field="*{id}"/>
+    <div class="form-card">
+        <form th:action="@{/clients/save}" th:object="${client}" method="post">
 
-    <div>
-        <label>First Name:</label>
-        <input type="text" th:field="*{firstName}" required>
+            <input type="hidden" th:field="*{id}">
+
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input class="form-control" type="text" id="firstName" th:field="*{firstName}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input class="form-control" type="text" id="lastName" th:field="*{lastName}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control" type="email" id="email" th:field="*{email}">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input class="form-control" type="text" id="phone" th:field="*{phone}">
+            </div>
+
+            <button type="submit" class="btn">Save Client</button>
+            <a th:href="@{/clients}" class="btn btn-secondary">Cancel</a>
+        </form>
     </div>
-
-    <div>
-        <label>Last Name:</label>
-        <input type="text" th:field="*{lastName}" required>
-    </div>
-
-    <div>
-        <label>Email:</label>
-        <input type="email" th:field="*{email}">
-    </div>
-
-    <div>
-        <label>Phone:</label>
-        <input type="text" th:field="*{phone}">
-    </div>
-
-    <div>
-        <label>City:</label>
-        <input type="text" th:field="*{city}">
-    </div>
-
-    <div>
-        <button type="submit">Save Client</button>
-    </div>
-
-</form>
-
-<br>
-<a th:href="@{/clients}">Back to Client List</a>
+</div>
 
 </body>
 </html>

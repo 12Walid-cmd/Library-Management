@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Loan Records</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="fragments/header :: navbar"></div>
+
+<div class="container">
+    <div class="flex-between mb-20">
+        <h1>Loan Records</h1>
+        <a th:href="@{/loans/borrow}" class="btn">Borrow a Book</a>
+    </div>
+
+    <div th:if="${error}" class="alert alert-error">
+        <p th:text="${error}"></p>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Client</th>
+            <th>Book</th>
+            <th>Loan Date</th>
+            <th>Due Date</th>
+            <th>Return Date</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="loan : ${loans}"
+            th:classappend="${loan.overdue} ? 'overdue-row' : ''">
+            <td th:text="${loan.id}"></td>
+            <td th:text="${loan.client.firstName + ' ' + loan.client.lastName}"></td>
+            <td th:text="${loan.book.title}"></td>
+            <td th:text="${loan.loanDate}"></td>
+            <td th:text="${loan.dueDate}"></td>
+            <td th:text="${loan.returnDate}"></td>
+            <td>
+                <span th:text="${loan.status}"></span>
+                <span th:if="${loan.overdue}" style="color:red; font-weight:bold;">
+                    (OVERDUE)
+                </span>
+            </td>
+            <td>
+                <a class="btn btn-success"
+                   th:if="${loan.status == 'BORROWED'}"
+                   th:href="@{/loans/return/{id}(id=${loan.id})}">
+                    Return
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

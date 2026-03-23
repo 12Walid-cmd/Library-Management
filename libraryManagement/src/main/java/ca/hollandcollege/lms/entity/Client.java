@@ -1,6 +1,8 @@
 package ca.hollandcollege.lms.entity;
 
 import jakarta.persistence.*;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 /*
  * This entity represents the clients table in the database.
@@ -14,6 +16,12 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    /*
+     * One client can have many loan records.
+     */
+    @OneToMany(mappedBy = "client")
+    private List<Loan> loans;
 
     // Client first name
     @Column(name = "first_name", nullable = false, length = 50)
@@ -85,5 +93,13 @@ public class Client {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public List<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
     }
 }

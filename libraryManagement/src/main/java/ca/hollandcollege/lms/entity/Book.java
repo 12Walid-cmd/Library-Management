@@ -1,6 +1,8 @@
 package ca.hollandcollege.lms.entity;
 
 import jakarta.persistence.*;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -36,6 +38,12 @@ public class Book {
 
     @Column(length = 20)
     private String status = "AVAILABLE";
+
+    /*
+     * One book can appear in many loan records.
+     */
+    @OneToMany(mappedBy = "book")
+    private List<Loan> loans;
 
     public Book() {
     }
@@ -118,5 +126,13 @@ public class Book {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
     }
 }

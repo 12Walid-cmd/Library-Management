@@ -1,23 +1,23 @@
 package ca.hollandcollege.lms.controller;
 
 import ca.hollandcollege.lms.entity.Client;
-import ca.hollandcollege.lms.repository.ClientRepository;
+import ca.hollandcollege.lms.service.ClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 /*
  * This controller handles all web requests related to clients.
+ * It talks to the service layer instead of directly using the repository.
  */
 @Controller
 public class ClientController {
 
-    // Gives access to the clients table
-    private final ClientRepository clientRepository;
+    private final ClientService clientService;
 
     // Constructor injection
-    public ClientController(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
     }
 
     /*
@@ -26,7 +26,7 @@ public class ClientController {
      */
     @GetMapping("/clients")
     public String listClients(Model model) {
-        model.addAttribute("clients", clientRepository.findAll());
+        model.addAttribute("clients", clientService.getAllClients());
         return "clients/list";
     }
 
@@ -45,7 +45,7 @@ public class ClientController {
      */
     @PostMapping("/clients/save")
     public String saveClient(@ModelAttribute Client client) {
-        clientRepository.save(client);
+        clientService.saveClient(client);
         return "redirect:/clients";
     }
 
@@ -54,9 +54,7 @@ public class ClientController {
      */
     @GetMapping("/clients/edit/{id}")
     public String showEditClientForm(@PathVariable Long id, Model model) {
-        Client client = clientRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid client id: " + id));
-
+        Client client = clientService.getClientById(id);
         model.addAttribute("client", client);
         return "clients/add";
     }
@@ -66,7 +64,7 @@ public class ClientController {
      */
     @GetMapping("/clients/delete/{id}")
     public String deleteClient(@PathVariable Long id) {
-        clientRepository.deleteById(id);
+        clientService.deleteClientById(id);
         return "redirect:/clients";
     }
 }

@@ -1,47 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Client List</title>
+    <title>Library Clients</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<h1>Library Clients</h1>
+<div th:replace="fragments/header :: navbar"></div>
 
-<a th:href="@{/clients/add}">Add New Client</a>
-<br><br>
+<div class="container">
+    <div class="flex-between mb-20">
+        <h1>Library Clients</h1>
+        <a th:href="@{/clients/add}" class="btn">Add New Client</a>
+    </div>
 
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>City</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="client : ${clients}">
-        <td th:text="${client.id}"></td>
-        <td th:text="${client.firstName}"></td>
-        <td th:text="${client.lastName}"></td>
-        <td th:text="${client.email}"></td>
-        <td th:text="${client.phone}"></td>
-        <td th:text="${client.city}"></td>
-        <td>
-            <a th:href="@{/clients/edit/{id}(id=${client.id})}">Edit</a>
-            |
-            <a th:href="@{/clients/delete/{id}(id=${client.id})}"
-               onclick="return confirm('Are you sure you want to delete this client?');">
-                Delete
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>City</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="client : ${clients}">
+            <td th:text="${client.id}"></td>
+            <td th:text="${client.firstName}"></td>
+            <td th:text="${client.lastName}"></td>
+            <td th:text="${client.email}"></td>
+            <td th:text="${client.phone}"></td>
+            <td th:text="${client.city}"></td>
+            <td>
+                <a th:href="@{/clients/edit/{id}(id=${client.id})}" class="btn btn-success">Edit</a>
+                <a th:href="@{/clients/delete/{id}(id=${client.id})}" class="btn btn-danger"
+                   onclick="return confirm('Are you sure you want to delete this client?');">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

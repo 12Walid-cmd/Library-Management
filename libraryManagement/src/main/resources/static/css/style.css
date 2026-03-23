@@ -1,0 +1,250 @@
+/* ===== General page styles ===== */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f3eb;
+    margin: 0;
+    padding: 0;
+    color: #1f2933;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+    color: #102a43;
+}
+
+/* ===== Top navigation ===== */
+.navbar {
+    background: #102a43;
+    color: white;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand {
+    font-weight: bold;
+    font-size: 22px;
+    color: #f0b429;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.nav-link {
+    color: #f0f4f8;
+    text-decoration: none;
+    padding: 8px 10px;
+    border-radius: 6px;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.nav-button {
+    background: #f0b429;
+    color: #102a43;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.nav-button:hover {
+    background: #d99a1d;
+}
+
+/* ===== Cards ===== */
+.card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card,
+.feature-card {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(16, 42, 67, 0.08);
+    min-width: 220px;
+    flex: 1 1 220px;
+    border-top: 4px solid #f0b429;
+}
+
+.card p.big-number {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 10px 0 0;
+    color: #102a43;
+}
+
+.feature-card {
+    text-align: center;
+}
+
+.feature-card p {
+    color: #52606d;
+    min-height: 60px;
+}
+
+/* ===== Buttons ===== */
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    border: none;
+    background: #243b53;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background: #102a43;
+}
+
+.btn-secondary {
+    background: #7b8794;
+}
+
+.btn-secondary:hover {
+    background: #616e7c;
+}
+
+.btn-success {
+    background: #2f855a;
+}
+
+.btn-success:hover {
+    background: #276749;
+}
+
+.btn-danger {
+    background: #c53030;
+}
+
+.btn-danger:hover {
+    background: #9b2c2c;
+}
+
+/* ===== Tables ===== */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(16, 42, 67, 0.06);
+}
+
+.table th,
+.table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e6e6e6;
+    text-align: left;
+}
+
+.table th {
+    background: #d9e2ec;
+    color: #102a43;
+}
+
+.table tr:hover {
+    background: #f9fbfd;
+}
+
+.overdue-row {
+    background-color: #fde8e8 !important;
+}
+
+/* ===== Forms ===== */
+.form-card {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(16, 42, 67, 0.08);
+    max-width: 500px;
+    border-top: 4px solid #f0b429;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #243b53;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #bcccdc;
+    border-radius: 6px;
+    background: #fff;
+}
+
+/* ===== Messages ===== */
+.alert {
+    padding: 12px 14px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.alert-error {
+    background: #fde8e8;
+    color: #9b2c2c;
+}
+
+.alert-success {
+    background: #def7ec;
+    color: #276749;
+}
+
+/* ===== Homepage ===== */
+.hero {
+    text-align: center;
+    padding: 40px 0 20px;
+}
+
+.hero p {
+    color: #52606d;
+    max-width: 700px;
+    margin: 0 auto 30px;
+}
+
+/* ===== Small helpers ===== */
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}

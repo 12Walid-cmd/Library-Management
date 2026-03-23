@@ -1,23 +1,23 @@
 package ca.hollandcollege.lms.controller;
 
 import ca.hollandcollege.lms.entity.Book;
-import ca.hollandcollege.lms.repository.BookRepository;
+import ca.hollandcollege.lms.service.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 /*
  * This controller handles all web requests related to books.
+ * It talks to the service layer instead of directly using the repository.
  */
 @Controller
 public class BookController {
 
-    // Gives access to the books table in the database
-    private final BookRepository bookRepository;
+    private final BookService bookService;
 
     // Constructor injection
-    public BookController(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
     }
 
     /*
@@ -25,11 +25,15 @@ public class BookController {
      * URL: /books
      */
     @GetMapping("/books")
-    public String listBooks(Model model) {
-        model.addAttribute("books", bookRepository.findAll());
+    public String listBooks(@RequestParam(required = false) String keyword, Model model) {
+        // Send filtered or full book list to the page
+        model.addAttribute("books", bookService.searchBooks(keyword));
+
+        // Send the keyword back so it stays in the search box
+        model.addAttribute("keyword", keyword);
+
         return "books/list";
     }
-
     /*
      * Show the Add Book form.
      * URL: /books/add
@@ -47,20 +51,17 @@ public class BookController {
      */
     @PostMapping("/books/save")
     public String saveBook(@ModelAttribute Book book) {
-        bookRepository.save(book);
+        bookService.saveBook(book);
         return "redirect:/books";
     }
 
     /*
      * Show the Edit Book form.
-     * Finds the book by id and sends it to the same form page.
      * URL example: /books/edit/1
      */
     @GetMapping("/books/edit/{id}")
     public String showEditBookForm(@PathVariable Long id, Model model) {
-        Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid book id: " + id));
-
+        Book book = bookService.getBookById(id);
         model.addAttribute("book", book);
         return "books/add";
     }
@@ -71,7 +72,7 @@ public class BookController {
      */
     @GetMapping("/books/delete/{id}")
     public String deleteBook(@PathVariable Long id) {
-        bookRepository.deleteById(id);
+        bookService.deleteBookById(id);
         return "redirect:/books";
     }
 }
